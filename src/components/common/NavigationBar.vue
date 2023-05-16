@@ -11,11 +11,15 @@ defineProps<{ userName: string }>()
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/assets/scss/_mixin.scss";
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #4EADF1;
+  background-color: $primary;
   overflow: hidden;
+  top: 0px;
+  left: 0px;
+  min-height: 30px;
 }
 
 /* Style the links inside the navigation bar */
