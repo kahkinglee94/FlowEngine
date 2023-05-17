@@ -1,23 +1,24 @@
 <script setup lang="ts">
+  import { ref } from 'vue'
+  import menuItemList from '@/module/mockdata/SideBarData.js'
+
+  const showItem = ref(false);
+
+  function toggleItem(test : any) {
+    console.log(test)
+    showItem.value = !showItem.value
+  }
 </script>
 
 <template>
   <div class="sidebar">
-    <button class="menu">簽核元件</button>
-    <div class="item">
-      <ul>
-        <li>串簽</li>
-        <li>會簽</li>
-        <li>多人擇一簽</li>
-      </ul>
-    </div>
-    <button class="menu">PLM開案管理</button>
-    <div class="item">
-      <ul>
-        <li>一般開案單</li>
-        <li>業務開案單</li>
-        <li>RD治具</li>
-      </ul>
+    <div v-for="menuItem in menuItemList">
+      <button class="menu" @click.prevent="toggleItem(this)">{{ menuItem.label }}</button>
+      <div class="item" v-show="showItem">
+        <ul>
+          <li v-for="item in menuItem.children">{{ item.label }}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -57,7 +58,6 @@
 .item {
   padding: 0 18px;
   background-color: white;
-  display: none;
   overflow: hidden;
 }
 
