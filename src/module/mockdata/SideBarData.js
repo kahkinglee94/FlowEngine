@@ -44,7 +44,13 @@ export default [
             label: 'RD治具',
             icon: 'fas fa-cog'
           },
-
         ]
     },
+    {
+      name: 'MonitorSRM',
+      label: 'MonitorSRM',
+      icon: '',
+      id: '',
+      children: []
+  },
 ]

@@ -2,19 +2,36 @@
   import { ref } from 'vue'
   import menuItemList from '@/module/mockdata/SideBarData.js'
 
-  const showItem = ref(false);
+  interface ISideBarData {
+    name: string,
+    label: string,
+    icon: string,
+    id: string,
+    showChildren: boolean,
+    children: ISideBarData[]
+  } 
 
-  function toggleItem(test : any) {
-    console.log(test)
-    showItem.value = !showItem.value
+  const showItem = ref(false)
+  const menuItemStateTmp = [] as ISideBarData[]
+  
+  for (let index = 0; index < menuItemList.length; index++) {
+    const el = { ...menuItemList[index], showChildren: false };
+    menuItemStateTmp.push(el)
   }
+
+  const menuItemState = ref(menuItemStateTmp)
+
+  function toggleShow(index : any) {
+    menuItemState.value[index].showChildren = !menuItemState.value[index].showChildren
+  }
+
 </script>
 
 <template>
   <div class="sidebar">
-    <div v-for="menuItem in menuItemList">
-      <button class="menu" @click.prevent="toggleItem(this)">{{ menuItem.label }}</button>
-      <div class="item" v-show="showItem">
+    <div v-for="(menuItem, index) in menuItemState">
+      <button class="menu" @click.prevent="toggleShow(index)">{{ menuItem.label }}</button>
+      <div class="item" v-if="menuItem.children && menuItem.children.length" v-show="menuItem.showChildren">
         <ul>
           <li v-for="item in menuItem.children">{{ item.label }}</li>
         </ul>
