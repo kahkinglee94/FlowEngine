@@ -69,6 +69,7 @@ function onDrop (event : any) {
 .element {
   position: fixed;
   padding: 10px 20px 10px 20px;
+  border-radius: 20px;
   border: 2px solid #000;
 }
 </style>

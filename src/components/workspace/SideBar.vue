@@ -38,7 +38,8 @@
       <button class="menu" @click.prevent="toggleShow(index)">{{ menuItem.label }}</button>
       <div class="item" v-if="menuItem.children && menuItem.children.length" v-show="menuItem.showChildren">
         <ul>
-          <li v-for="item in menuItem.children" 
+          <li v-for="item in menuItem.children"
+            style="padding: 10px 0px 10px 20px; border-bottom: 1px solid #D3D3D3;"
             :key="item.name"
             draggable="true"
             @dragstart="startDrag($event, item)">{{ item.label }}</li>
