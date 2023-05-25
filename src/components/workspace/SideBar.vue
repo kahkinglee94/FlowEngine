@@ -11,7 +11,6 @@
     children: ISideBarData[]
   } 
 
-  const showItem = ref(false)
   const menuItemStateTmp = [] as ISideBarData[]
   
   for (let index = 0; index < menuItemList.length; index++) {
@@ -25,6 +24,12 @@
     menuItemState.value[index].showChildren = !menuItemState.value[index].showChildren
   }
 
+  function startDrag (event : any, item : any) {
+    console.log(item)
+    event.dataTransfer.dropEffect = 'move'
+    event.dataTransfer.setData('itemName', item.name)
+  }
+
 </script>
 
 <template>
@@ -33,20 +38,25 @@
       <button class="menu" @click.prevent="toggleShow(index)">{{ menuItem.label }}</button>
       <div class="item" v-if="menuItem.children && menuItem.children.length" v-show="menuItem.showChildren">
         <ul>
-          <li v-for="item in menuItem.children">{{ item.label }}</li>
+          <li v-for="item in menuItem.children" 
+            :key="item.name"
+            draggable="true"
+            @dragstart="startDrag($event, item)">{{ item.label }}</li>
         </ul>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/assets/scss/_base.scss";
 /* The side navigation menu */
 .sidebar {
   height: 100%; /* 100% Full-height */
   width: 250px; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 1; /* Stay on top */
+  float: left;
   left: 0;
   background-color: #F2FAFF; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */

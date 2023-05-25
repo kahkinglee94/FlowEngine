@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import NavigationBar from './components/common/NavigationBar.vue'
 import SideBar from './components/workspace/SideBar.vue'
+import Canvas from './components/workspace/Canvas.vue'
 </script>
 
 <template>
   <NavigationBar user-name="Joelle" />
   <SideBar />
+  <Canvas />
 </template>
 
 <style scoped>
