@@ -14,10 +14,22 @@ onMounted(() => {
     //console.log(canvas.value)
 })
 
+function startDrag (event : any, item : any) {
+    event.dataTransfer.dropEffect = 'move'
+    event.dataTransfer.effectAllowed = 'move'
+    event.dataTransfer.setData('itemName', item.name)
+  }
+
 function onDrop (event : any) {
     const itemName = event.dataTransfer.getData('itemName')
-    const elementObj = {name: itemName, posX: event.clientX, posY: event.clientY}
-    elementList.value.push(elementObj)
+    let existingElement = elementList.value.find(x => x.name === itemName)
+    if (existingElement == undefined)
+      elementList.value.push({name: itemName, posX: event.clientX, posY: event.clientY})
+    else
+    {
+      existingElement.posX = event.clientX
+      existingElement.posY = event.clientY
+    }
   }
 
 // function onWheel (event : any) {
@@ -49,8 +61,10 @@ function onDrop (event : any) {
     @dragenter.prevent
     @dragover.prevent>
     <div v-for="element in elementList"
-    class="element"
-    :style="{top: element.posY + 'px', left: element.posX + 'px'}">{{ element.name }}</div>
+      class="element"
+      draggable="true"
+      @dragstart="startDrag($event, element)"
+      :style="{top: element.posY + 'px', left: element.posX + 'px'}">{{ element.name }}</div>
   </div>
 </template>
 

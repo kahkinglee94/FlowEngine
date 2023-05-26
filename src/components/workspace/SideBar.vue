@@ -25,7 +25,6 @@
   }
 
   function startDrag (event : any, item : any) {
-    console.log(item)
     event.dataTransfer.dropEffect = 'move'
     event.dataTransfer.setData('itemName', item.name)
   }
