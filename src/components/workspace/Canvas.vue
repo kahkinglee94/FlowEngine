@@ -60,11 +60,15 @@ function onDrop (event : any) {
     @drop="onDrop($event)"
     @dragenter.prevent
     @dragover.prevent>
-    <div v-for="element in elementList"
-      class="element"
+    <div class="element" v-for="element in elementList"
       draggable="true"
       @dragstart="startDrag($event, element)"
-      :style="{top: element.posY + 'px', left: element.posX + 'px'}">{{ element.name }}</div>
+      :style="{top: element.posY + 'px', left: element.posX + 'px'}">
+      <div class="element-content">
+        <div class="element-next">></div>
+        <div class="element-prev">></div>
+        {{ element.name }}</div>
+    </div>
   </div>
 </template>
 
@@ -82,8 +86,22 @@ function onDrop (event : any) {
 
 .element {
   position: fixed;
+}
+
+.element-content {
+  position: relative;
   padding: 10px 20px 10px 20px;
-  border-radius: 20px;
+  border-radius: 10px;
   border: 2px solid #000;
+}
+
+.element-next {
+  position: absolute;
+  right: 0;
+}
+
+.element-prev {
+  position: absolute;
+  left: 0;
 }
 </style>
