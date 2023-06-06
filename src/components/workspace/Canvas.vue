@@ -65,9 +65,10 @@ function onDrop (event : any) {
       @dragstart="startDrag($event, element)"
       :style="{top: element.posY + 'px', left: element.posX + 'px'}">
       <div class="element-content">
-        <div class="element-next">></div>
-        <div class="element-prev">></div>
-        {{ element.name }}</div>
+        <div class="element-next"><font-awesome-icon icon="fa-solid fa-circle-chevron-right" /></div>
+        <div class="element-prev"><font-awesome-icon icon="fa-solid fa-circle-chevron-left" /></div>
+        {{ element.name }}
+      </div>
     </div>
   </div>
 </template>
